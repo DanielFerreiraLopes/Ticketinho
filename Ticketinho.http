@@ -1,0 +1,6 @@
+@Ticketinho_HostAddress = http://localhost:5268
+
+GET {{Ticketinho_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

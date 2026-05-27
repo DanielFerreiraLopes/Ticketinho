@@ -1,0 +1,123 @@
+[
+  {
+    "ContainingType": "Ticketinho.Eventos.Presentation.Controllers.EventsController",
+    "Method": "BuscarEvento",
+    "RelativePath": "api/Events/BuscarEvento",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ticketinho.Eventos.Presentation.Controllers.EventsController",
+    "Method": "CriarEvento",
+    "RelativePath": "api/Events/CriarEvento",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Ticketinho.Eventos.Presentation.DTOs.CreateEventRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ticketinho.Eventos.Presentation.Controllers.EventsController",
+    "Method": "EditarEvento",
+    "RelativePath": "api/Events/EditarEvento",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "eventDTO",
+        "Type": "Ticketinho.Eventos.Presentation.DTOs.CreateEventRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ticketinho.Eventos.Presentation.Controllers.EventsController",
+    "Method": "ListarEventos",
+    "RelativePath": "api/Events/ListarEventos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ticketinho.Vendas.Presentation.Controllers.OrderController",
+    "Method": "BuscarOrder",
+    "RelativePath": "api/Order/BuscarOrder",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ticketinho.Vendas.Presentation.Controllers.OrderController",
+    "Method": "BuscarPorDocumento",
+    "RelativePath": "api/Order/BuscarPorDocumento",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "document",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ticketinho.Vendas.Presentation.Controllers.OrderController",
+    "Method": "ComprarIngresso",
+    "RelativePath": "api/Order/ComprarIngresso",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Ticketinho.Vendas.Presentation.DTOs.ComprarIngressoRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ticketinho.Vendas.Presentation.Controllers.OrderController",
+    "Method": "ListarOrders",
+    "RelativePath": "api/Order/ListarOrders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]
