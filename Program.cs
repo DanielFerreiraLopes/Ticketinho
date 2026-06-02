@@ -13,6 +13,17 @@ using Ticketinho.Vendas.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+// LIBERANDO O CORS PARA O FRONTEND
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -28,7 +39,7 @@ builder.Services.AddScoped<IOrderEventRepository, OrderEventRepository>();
 builder.Services.AddScoped<IOrderDomainRepository, OrderDomainRepository>();
 builder.Services.AddScoped<IOrderTicketRepository, OrderTicketRepository>();
 builder.Services.AddScoped<IOrderTicketUseCase, OrderTicketUseCase>();
-builder.Services.AddScoped<IGetTicketsByDocumentUseCase, GetTicketsByDocumentUseCase>();    
+builder.Services.AddScoped<IGetTicketsByDocumentUseCase, GetTicketsByDocumentUseCase>();
 builder.Services.AddScoped<IListOrdersUseCase, ListOrdersUseCase>();
 builder.Services.AddScoped<IFindOrderUseCase, FindOrderUseCase>();
 builder.Services.AddScoped<IPaymentAdapter, PaymentAdapter>();
@@ -39,7 +50,12 @@ builder.Services.AddDbContext<OrderDbContext>(options =>
 );
 
 var app = builder.Build();
+app.UseHttpsRedirection();
 
+// ATIVANDO O CORS AQUI (Tem que ser antes do UseAuthorization)
+app.UseCors("AllowAll");
+
+app.UseAuthorization();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
