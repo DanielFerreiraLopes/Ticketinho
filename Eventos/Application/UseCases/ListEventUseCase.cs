@@ -1,5 +1,6 @@
 ﻿using Ticketinho.Eventos.Application.Interfaces;
 using Ticketinho.Eventos.Domains.Entities;
+using Ticketinho.Eventos.Presentation.DTOs;
 using Ticketinho.Eventos.Presentation.Interfaces;
 
 namespace Ticketinho.Eventos.Application.UseCases
@@ -13,12 +14,14 @@ namespace Ticketinho.Eventos.Application.UseCases
             _eventRepository = eventRepository;
         }
 
-        public List<EventDomain> Run()
+        public List<EventResponse> Run()
         {
             try
             {
                 List<EventDomain> events = _eventRepository.GetEvents();
-                return events;
+                List<EventResponse> eventResponses = events.Select(e => _MapEventResponse(e)).ToList();
+
+                return eventResponses;
             }
             catch (Exception ex)
             {
@@ -26,5 +29,21 @@ namespace Ticketinho.Eventos.Application.UseCases
             }
         }
 
+        private EventResponse _MapEventResponse(EventDomain eventDomain)
+        {
+            return new EventResponse
+            {
+                Id = eventDomain.Id,
+                Name = eventDomain.Name.Value,
+                Description = eventDomain.Description.Value,
+                Singer = eventDomain.Singer.Value,
+                Price = eventDomain.Price.Value,
+                EventDate = eventDomain.EventDate,
+                MaxCapacity = eventDomain.MaxCapacity.Value,
+                Available = eventDomain.Available,
+                Location = eventDomain.Location.Value
+
+            };
+        }
     }
 }

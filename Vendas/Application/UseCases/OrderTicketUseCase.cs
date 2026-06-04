@@ -36,15 +36,15 @@ namespace Ticketinho.Vendas.Application.UseCases
 
             OrderDomain newOrderDomain = new OrderDomain(
                 Guid.NewGuid(),
-                request.Name_user,
-                request.Document_user,
-                request.Email_user,
+                new Name(request.Name_user),
+                new Document(request.Document_user),
+                new Email(request.Email_user),
                 request.EventId,
-                request.Quantity,
-                orderEvent.Price * request.Quantity,
-                request.PaymentMethod,
+                new Quantity(request.Quantity),
+                new Price(orderEvent.Price.Value * request.Quantity),
+                new PaymentMethod(request.PaymentMethod),
                 DateTime.Now,
-                0
+                new Status(0)
             );
 
 
@@ -53,7 +53,7 @@ namespace Ticketinho.Vendas.Application.UseCases
                 throw new ArgumentNullException(nameof(newOrderDomain));
             }
 
-            bool paymentSuccess = _paymentAdapter.ProcessPayment(newOrderDomain.Id, newOrderDomain.FinalPrice, newOrderDomain.PaymentMethod).Result;
+            bool paymentSuccess = _paymentAdapter.ProcessPayment(newOrderDomain.Id, newOrderDomain.FinalPrice.Value, newOrderDomain.PaymentMethod.Value).Result;
 
             if (!paymentSuccess)
             {
@@ -74,7 +74,7 @@ namespace Ticketinho.Vendas.Application.UseCases
 
             Random ticketNumber = new Random();
 
-            for (var i = 0; i < newOrderDomain.Quantity; i++)
+            for (var i = 0; i < newOrderDomain.Quantity.Value; i++)
             {
                 _ticketRepository.AddTicket(ticketNumber.Next(100000, 999999), newOrderDomain.Id);
             }

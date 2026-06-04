@@ -1,5 +1,6 @@
 ﻿using Ticketinho.Vendas.Application.Interfaces;
 using Ticketinho.Vendas.Domains.Entities;
+using Ticketinho.Vendas.Presentation.DTOs;
 using Ticketinho.Vendas.Presentation.Interfaces;
 
 namespace Ticketinho.Vendas.Application.UseCases
@@ -11,7 +12,7 @@ namespace Ticketinho.Vendas.Application.UseCases
         {
             _orderRepository = orderRepository;
         }
-        public OrderDomain Run(Guid id)
+        public OrderResponse Run(Guid id)
         {
 
             try
@@ -24,12 +25,30 @@ namespace Ticketinho.Vendas.Application.UseCases
                 if (order == null)
                     throw new Exception("Pedido não encontrado.");
 
-                return order;
+             
+                return _MapToOrderResponse(order);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        private OrderResponse _MapToOrderResponse(OrderDomain order)
+        {
+            return new OrderResponse
+            {
+                Id = order.Id,
+                Name_user = order.Name_user.Value,
+                Document_user = order.Document_user.Value,
+                Email_user = order.Email_user.Value,
+                EventId = order.EventId,
+                Quantity = order.Quantity.Value,
+                FinalPrice = order.FinalPrice.Value,
+                PaymentMethod = order.PaymentMethod.Value,
+                DateOrder = order.DateOrder,
+                Status = order.Status.Value
+            };
         }
     }
 }

@@ -22,15 +22,15 @@ namespace Ticketinho.Vendas.Repositories
             Order orderEntity = new Order
             (
                 orderDomain.Id,
-                orderDomain.Name_user,
-                orderDomain.Document_user,
-                orderDomain.Email_user,
+                orderDomain.Name_user.Value,
+                orderDomain.Document_user.Value,
+                orderDomain.Email_user.Value,
                 orderDomain.EventId,
-                orderDomain.Quantity,
-                orderDomain.FinalPrice,
-                orderDomain.PaymentMethod,
+                orderDomain.Quantity.Value,
+                orderDomain.FinalPrice.Value,
+                orderDomain.PaymentMethod.Value,
                 orderDomain.DateOrder,
-                orderDomain.Status
+                orderDomain.Status.Value
             );
              _context.Orders.Add(orderEntity);
              _context.SaveChanges();
@@ -45,14 +45,14 @@ namespace Ticketinho.Vendas.Repositories
 
             if (findOrder == null) throw new Exception("Pedido não encontrado.");
 
-            findOrder.Name_user = orderDomain.Name_user;
-            findOrder.Document_user = orderDomain.Document_user;
-            findOrder.Email_user = orderDomain.Email_user;
+            findOrder.Name_user = orderDomain.Name_user.Value;
+            findOrder.Document_user = orderDomain.Document_user.Value;
+            findOrder.Email_user = orderDomain.Email_user.Value;
             findOrder.EventId = orderDomain.EventId;
-            findOrder.Quantity = orderDomain.Quantity;
-            findOrder.FinalPrice = orderDomain.FinalPrice;
-            findOrder.PaymentMethod = orderDomain.PaymentMethod;
-            findOrder.Status = orderDomain.Status;
+            findOrder.Quantity = orderDomain.Quantity.Value;
+            findOrder.FinalPrice = orderDomain.FinalPrice.Value;
+            findOrder.PaymentMethod = orderDomain.PaymentMethod.Value;
+            findOrder.Status = orderDomain.Status.Value;
             _context.Orders.Update(findOrder);
             _context.SaveChanges();
         }
@@ -100,15 +100,15 @@ namespace Ticketinho.Vendas.Repositories
         {
             return new OrderDomain(
                 order.Id,
-                order.Name_user,
-                order.Document_user,
-                order.Email_user,
+                new Name(order.Name_user),
+                new Document(order.Document_user),
+                new Email(order.Email_user),
                 order.EventId,
-                order.Quantity,
-                order.FinalPrice,
-                order.PaymentMethod,
+                new Quantity(order.Quantity),
+                new Price(order.FinalPrice),
+                new PaymentMethod(order.PaymentMethod),
                 order.DateOrder,
-                order.Status
+                new Status(order.Status)
             );
         }
     }

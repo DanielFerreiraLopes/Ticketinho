@@ -1,9 +1,10 @@
 ﻿using Ticketinho.Vendas.Domains.Entities;
+using Ticketinho.Vendas.Presentation.DTOs;
 
 namespace Ticketinho.Vendas.Presentation.Interfaces
 {
     public interface IFindOrderUseCase
     {
-        public OrderDomain Run(Guid id);
+        public OrderResponse Run(Guid id);
     }
 }

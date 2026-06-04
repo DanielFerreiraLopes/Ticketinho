@@ -6,23 +6,18 @@ namespace Ticketinho.Vendas.Domains.Entities
     public class OrderDomain
     {
         public Guid Id { get; set; }
-        public string Name_user { get; set; }
-        public long Document_user { get; set; }
-        public string Email_user { get; set; }
+        public Name Name_user { get; set; }
+        public Document Document_user { get; set; }
+        public Email Email_user { get; set; }
         public Guid EventId { get; set; }
-        public int Quantity { get; set; }
-        public double FinalPrice { get; set; }
-        public string PaymentMethod { get; set; }
-        public int Status { get; set; }
+        public Quantity Quantity { get; set; }
+        public Price FinalPrice { get; set; }
+        public PaymentMethod PaymentMethod { get; set; }
+        public Status Status { get; set; }
         public DateTime DateOrder { get; set; }
 
-        public OrderDomain(Guid Id, string name_user, long document, string email, Guid eventId, int quantity, double finalPrice, string paymentMethod, DateTime dateOrder, int status)
+        public OrderDomain(Guid Id, Name name_user, Document document, Email email, Guid eventId, Quantity quantity, Price finalPrice, PaymentMethod paymentMethod, DateTime dateOrder, Status status)
         {
-            if (string.IsNullOrWhiteSpace(name_user)) throw new Exception("Nome do usuário é obrigatório.");
-            if (quantity <= 0) throw new Exception("A quantidade de ingressos deve ser maior que zero.");
-            if (finalPrice <= 0) throw new Exception("O preço do ingresso deve ser maior que zero.");
-            if (string.IsNullOrWhiteSpace(paymentMethod)) throw new Exception("Método de pagamento é obrigatório.");
-
             this.Id = Id;
             this.Name_user = name_user;
             this.Document_user = document;
@@ -46,17 +41,17 @@ namespace Ticketinho.Vendas.Domains.Entities
             if(orderEvent.EventDate < DateTime.Now)
                 throw new Exception("O Evento não está disponível");
 
-            if (orderEvent.TicketsSold + this.Quantity > orderEvent.MaxCapacity)
+            if (orderEvent.TicketsSold.Value + this.Quantity.Value > orderEvent.MaxCapacity.Value)
                 throw new Exception("Não há ingressos suficientes disponíveis");
 
 
             this.ApproveOrder();
-            orderEvent.TicketsSold += this.Quantity;
+            orderEvent.TicketsSold = new TicketsSold(orderEvent.TicketsSold.Value + this.Quantity.Value);
         }
 
         public void ApproveOrder()
         {
-            this.Status = 1; //Aprovado
+            this.Status = new Status(1); //Aprovado
         }
     }
 }

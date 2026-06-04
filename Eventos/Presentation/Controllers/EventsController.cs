@@ -27,14 +27,14 @@ namespace Ticketinho.Eventos.Presentation.Controllers
         [HttpGet("ListarEventos")]
         public IActionResult ListarEventos()
         {
-            List<EventDomain> events = _listEventUseCase.Run();
+            List<EventResponse> events = _listEventUseCase.Run();
             return Ok(events);
         }
 
         [HttpGet("BuscarEvento")]
         public IActionResult BuscarEvento([FromQuery] Guid id)
         {
-            EventDomain eventFinded = _findEventUseCase.Run(id);
+            EventResponse eventFinded = _findEventUseCase.Run(id);
             return Ok(eventFinded);
         }
 
@@ -44,7 +44,7 @@ namespace Ticketinho.Eventos.Presentation.Controllers
             try
             {
                 _createEventUseCase.Run(request);
-                return Created();
+                return Created("", null);
             }
             catch (Exception ex)
             {

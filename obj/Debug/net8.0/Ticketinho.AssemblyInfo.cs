@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Ticketinho")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+296d492751d974720b3f131dbbc664f32ba9c5a8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aee2db2cb92887bf14c4db090da87c10e950b435")]
 [assembly: System.Reflection.AssemblyProductAttribute("Ticketinho")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Ticketinho")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

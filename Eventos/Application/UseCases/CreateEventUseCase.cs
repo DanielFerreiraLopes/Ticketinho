@@ -1,5 +1,6 @@
 ﻿using Ticketinho.Eventos.Application.Interfaces;
 using Ticketinho.Eventos.Domains.Entities;
+using Ticketinho.Eventos.Domains.ValueObjects;
 using Ticketinho.Eventos.Presentation.DTOs;
 using Ticketinho.Eventos.Presentation.Interfaces;
 using Ticketinho.Eventos.Repositories;
@@ -20,14 +21,14 @@ namespace Ticketinho.Eventos.Application.UseCases
 
             EventDomain eventDomain = new EventDomain(
                 Guid.NewGuid(),
-                request.Name,
-                request.Description,
-                request.Singer,
-                request.Price,
+                new Name(request.Name),
+                new Description(request.Description),
+                new Singer(request.Singer),
+                new Price(request.Price),
                 request.EventDate,
-                request.MaxCapacity,
+                new MaxCapacity(request.MaxCapacity),
                 request.Available,
-                request.Location
+                new Location(request.Location)
             );
             try
             {

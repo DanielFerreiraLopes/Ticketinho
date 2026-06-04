@@ -2,6 +2,7 @@
 using Ticketinho.Infrastructure.Persistence;
 using Ticketinho.Vendas.Application.Interfaces;
 using Ticketinho.Vendas.Domains.Entities;
+using Ticketinho.Vendas.Domains.ValueObjects;
 
 namespace Ticketinho.Vendas.Repositories
 {
@@ -36,7 +37,7 @@ namespace Ticketinho.Vendas.Repositories
 
             if (@event == null) throw new Exception("Evento não encontrado.");
 
-            @event.TicketsSold = orderEvent.TicketsSold;
+            @event.TicketsSold = orderEvent.TicketsSold.Value;
             _context.Events.Update(@event);
             _context.SaveChanges();
         }
@@ -47,9 +48,9 @@ namespace Ticketinho.Vendas.Repositories
             (
                 eventEntity.Id,
                 eventEntity.EventDate,
-                eventEntity.Price,
-                eventEntity.MaxCapacity,
-                eventEntity.TicketsSold,
+                new Price(eventEntity.Price),
+                new Quantity(eventEntity.MaxCapacity),
+                new TicketsSold(eventEntity.TicketsSold),
                 eventEntity.Available
             );
         }

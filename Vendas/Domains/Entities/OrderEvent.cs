@@ -1,15 +1,17 @@
-﻿namespace Ticketinho.Vendas.Domains.Entities
+﻿using Ticketinho.Vendas.Domains.ValueObjects;
+
+namespace Ticketinho.Vendas.Domains.Entities
 {
     public class OrderEvent
     {
         public Guid Id { get; set; }
         public DateTime EventDate { get; set; }
-        public double Price { get; set; }
-        public int MaxCapacity { get; set; }
-        public int TicketsSold { get; set; }
+        public Price Price { get; set; }
+        public Quantity MaxCapacity { get; set; }
+        public TicketsSold TicketsSold { get; set; }
         public bool Available { get; set; }
 
-        public OrderEvent(Guid id, DateTime eventDate, double price, int maxCapacity, int ticketsSold, bool available)
+        public OrderEvent(Guid id, DateTime eventDate, Price price, Quantity maxCapacity, TicketsSold ticketsSold, bool available)
         {
             this.Id = id;
             this.EventDate = eventDate;

@@ -1,5 +1,6 @@
 ﻿using Ticketinho.Eventos.Application.Interfaces;
 using Ticketinho.Eventos.Domains.Entities;
+using Ticketinho.Eventos.Domains.ValueObjects;
 using Ticketinho.Eventos.Presentation.DTOs;
 using Ticketinho.Infrastructure.Entities;
 using Ticketinho.Infrastructure.Persistence;
@@ -19,15 +20,15 @@ namespace Ticketinho.Eventos.Repositories
         {
             Event eventEntity = new Event(
                 eventDomain.Id,
-                eventDomain.Name,
-                eventDomain.Description,
-                eventDomain.Singer,
-                eventDomain.Price,
+                eventDomain.Name.Value,
+                eventDomain.Description.Value,
+                eventDomain.Singer.Value,
+                eventDomain.Price.Value,
                 eventDomain.EventDate,
-                eventDomain.MaxCapacity,
+                eventDomain.MaxCapacity.Value,
                 0,
                 eventDomain.Available,
-                eventDomain.Location
+                eventDomain.Location.Value
             );
             _context.Events.Add(eventEntity);
             _context.SaveChanges();
@@ -61,14 +62,14 @@ namespace Ticketinho.Eventos.Repositories
         {
             return new EventDomain(
                 event1.Id,
-                event1.Name,
-                event1.Description,
-                event1.Singer,
-                event1.Price,
+                new Name(event1.Name),
+                new Description(event1.Description),
+                new Singer(event1.Singer),
+                new Price(event1.Price),
                 event1.EventDate,
-                event1.MaxCapacity,
+                new MaxCapacity(event1.MaxCapacity),
                 event1.Available,
-                event1.Location
+                new Location(event1.Location)
             );
         }
     }
